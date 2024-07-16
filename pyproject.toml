@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "race"
+authors = [
+    {name = "Jason Zheng", email = "zhengjiasheng2022@iscas.ac.cn"},
+]
+description = "RACE for multi-dimensional evaluation of LLM-generated code"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["race", "benchmark"]
+license = {file = "LICENSE"}
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "wget>=3.2",
+    "tempdir>=0.7.1",
+    "multipledispatch>=0.6.0",
+    "appdirs>=1.4.4",
+    "numpy>=1.19.5",
+    "tqdm>=4.56.0",
+    "termcolor>=2.0.0",
+    "fire>=0.6.0",
+    "openai>=1.11.1",
+    "scipy",
+    "func_timeout",
+    "pyext",
+    "radon",
+    "rich",
+    "tenacity",
+    "transformers",
+    "torch",
+    "psutil",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+vllm_gen = [
+    "vllm",
+    "stop_sequencer"
+]
+
+eval = [
+    "gensim~=4.2.0",
+    "bs4~=0.0.1",
+    "beautifulsoup4~=4.11.1",
+    "pypdf2~=3.0.1",
+    "reportlab~=4.0.4",
+    "nltk~=3.7",
+    "pillow~=9.1.1",
+    "numpy~=1.22.4",
+    "pandas~=1.4.2",
+    "jsonlines~=3.1.0",
+    "levenshtein~=0.20.8",
+    "scipy~=1.8.1",
+    "openpyxl~=3.0.9",
+]
+
+[tool.setuptools]
+packages = ["race"]
+
+[tool.setuptools_scm]
+write_to = "race/_version.py"
+version_scheme = "release-branch-semver"
+local_scheme = "no-local-version"

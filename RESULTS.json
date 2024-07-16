@@ -1,0 +1,686 @@
+{
+    "gpt-4o-2024-05-13": {
+        "readability": {
+            "R*": 80.5,
+            "RN_p": 81.1,
+            "RN_if": 91.8,
+            "RN": 75.3,
+            "RL_p": 78.9,
+            "RL_if": 78.9,
+            "RL": 63.2,
+            "RC_p": 79.8,
+            "RC_if": 78.7,
+            "RC": 64.3,
+            "MBPP*": 64.6,
+            "Readability": 67.6
+        },
+        "maintainability": {
+            "MI*": 38.0,
+            "MI_p": 35.0,
+            "MI": 75.1,
+            "MC*": 57.2,
+            "MC_p": 56.3,
+            "MC": 35.2,
+            "Maintainability": 55.1
+        },
+        "efficiency": {
+            "E*": 59.4,
+            "E_p": 58.4,
+            "E_NI_T": 44.8,
+            "E_NI_S": 42.0,
+            "Efficiency": 43.4
+        },
+        "correctness": {
+            "Correctness": 59.9
+        },
+        "overall": {
+            "RACE Score": 56.5
+        }
+    },
+    "gpt-3.5-turbo-0125": {
+        "readability": {
+            "R*": 62.8,
+            "RN_p": 63.2,
+            "RN_if": 74.4,
+            "RN": 48.3,
+            "RL_p": 60.4,
+            "RL_if": 76.8,
+            "RL": 46.1,
+            "RC_p": 65.8,
+            "RC_if": 60.0,
+            "RC": 41.5,
+            "MBPP*": 62.2,
+            "Readability": 45.3
+        },
+        "maintainability": {
+            "MI*": 28.0,
+            "MI_p": 24.0,
+            "MI": 80.2,
+            "MC*": 31.1,
+            "MC_p": 28.1,
+            "MC": 18.5,
+            "Maintainability": 49.4
+        },
+        "efficiency": {
+            "E*": 39.6,
+            "E_p": 32.7,
+            "E_NI_T": 27.5,
+            "E_NI_S": 36.5,
+            "Efficiency": 32.0
+        },
+        "correctness": {
+            "Correctness": 44.7
+        },
+        "overall": {
+            "RACE Score": 42.8
+        }
+    },
+    "CodeLlama-7b-Instruct-hf": {
+        "readability": {
+            "R*": 32.3,
+            "RN_p": 31.5,
+            "RN_if": 55.5,
+            "RN": 17.0,
+            "RL_p": 31.7,
+            "RL_if": 59.7,
+            "RL": 23.4,
+            "RC_p": 30.2,
+            "RC_if": 67.4,
+            "RC": 18.3,
+            "MBPP*": 43.1,
+            "Readability": 19.6
+        },
+        "maintainability": {
+            "MI*": 16.0,
+            "MI_p": 15.0,
+            "MI": 71.8,
+            "MC*": 12.2,
+            "MC_p": 10.9,
+            "MC": 7.2,
+            "Maintainability": 39.5
+        },
+        "efficiency": {
+            "E*": 15.8,
+            "E_p": 13.9,
+            "E_NI_T": 8.2,
+            "E_NI_S": 8.8,
+            "Efficiency": 8.5
+        },
+        "correctness": {
+            "Correctness": 23.9
+        },
+        "overall": {
+            "RACE Score": 22.9
+        }
+    },
+    "CodeLlama-7b-Python-hf": {
+        "readability": {
+            "R*": 29.3,
+            "RN_p": 29.5,
+            "RN_if": 66.4,
+            "RN": 20.4,
+            "RL_p": 30.1,
+            "RL_if": 76.6,
+            "RL": 25.8,
+            "RC_p": 24.7,
+            "RC_if": 42.1,
+            "RC": 11.6,
+            "MBPP*": 41.3,
+            "Readability": 19.3
+        },
+        "maintainability": {
+            "MI*": 11.0,
+            "MI_p": 10.0,
+            "MI": 79.4,
+            "MC*": 5.6,
+            "MC_p": 6.5,
+            "MC": 3.7,
+            "Maintainability": 41.6
+        },
+        "efficiency": {
+            "E*": 14.9,
+            "E_p": 15.8,
+            "E_NI_T": 14.3,
+            "E_NI_S": 14.4,
+            "Efficiency": 14.4
+        },
+        "correctness": {
+            "Correctness": 20.4
+        },
+        "overall": {
+            "RACE Score": 23.9
+        }
+    },
+    "CodeLlama-13b-Instruct-hf": {
+        "readability": {
+            "R*": 36.0,
+            "RN_p": 37.7,
+            "RN_if": 57.8,
+            "RN": 22.0,
+            "RL_p": 35.0,
+            "RL_if": 59.9,
+            "RL": 23.6,
+            "RC_p": 35.7,
+            "RC_if": 64.3,
+            "RC": 23.2,
+            "MBPP*": 40.7,
+            "Readability": 22.9
+        },
+        "maintainability": {
+            "MI*": 17.0,
+            "MI_p": 19.0,
+            "MI": 82.1,
+            "MC*": 10.6,
+            "MC_p": 13.1,
+            "MC": 7.6,
+            "Maintainability": 44.8
+        },
+        "efficiency": {
+            "E*": 17.8,
+            "E_p": 17.8,
+            "E_NI_T": 10.4,
+            "E_NI_S": 16.1,
+            "Efficiency": 13.2
+        },
+        "correctness": {
+            "Correctness": 24.4
+        },
+        "overall": {
+            "RACE Score": 26.4
+        }
+    },
+    "CodeLlama-13b-Python-hf": {
+        "readability": {
+            "R*": 40.2,
+            "RN_p": 35.0,
+            "RN_if": 61.3,
+            "RN": 22.4,
+            "RL_p": 34.8,
+            "RL_if": 83.5,
+            "RL": 30.9,
+            "RC_p": 30.2,
+            "RC_if": 60.7,
+            "RC": 20.4,
+            "MBPP*": 29.4,
+            "Readability": 24.6
+        },
+        "maintainability": {
+            "MI*": 16.0,
+            "MI_p": 15.0,
+            "MI": 78.6,
+            "MC*": 6.1,
+            "MC_p": 4.8,
+            "MC": 2.4,
+            "Maintainability": 40.5
+        },
+        "efficiency": {
+            "E*": 16.8,
+            "E_p": 17.8,
+            "E_NI_T": 13.8,
+            "E_NI_S": 14.7,
+            "Efficiency": 14.2
+        },
+        "correctness": {
+            "Correctness": 21.7
+        },
+        "overall": {
+            "RACE Score": 25.3
+        }
+    },
+    "CodeLlama-34b-Instruct-hf": {
+        "readability": {
+            "R*": 36.0,
+            "RN_p": 36.5,
+            "RN_if": 54.3,
+            "RN": 21.1,
+            "RL_p": 35.8,
+            "RL_if": 41.7,
+            "RL": 17.5,
+            "RC_p": 36.3,
+            "RC_if": 32.0,
+            "RC": 9.4,
+            "MBPP*": 45.8,
+            "Readability": 16.0
+        },
+        "maintainability": {
+            "MI*": 12.0,
+            "MI_p": 18.0,
+            "MI": 73.2,
+            "MC*": 15.6,
+            "MC_p": 14.2,
+            "MC": 8.5,
+            "Maintainability": 40.9
+        },
+        "efficiency": {
+            "E*": 20.8,
+            "E_p": 15.8,
+            "E_NI_T": 14.4,
+            "E_NI_S": 13.8,
+            "Efficiency": 14.1
+        },
+        "correctness": {
+            "Correctness": 26.0
+        },
+        "overall": {
+            "RACE Score": 24.2
+        }
+    },
+    "CodeLlama-34b-Python-hf": {
+        "readability": {
+            "R*": 31.7,
+            "RN_p": 27.2,
+            "RN_if": 66.9,
+            "RN": 18.6,
+            "RL_p": 32.5,
+            "RL_if": 73.2,
+            "RL": 26.7,
+            "RC_p": 27.8,
+            "RC_if": 39.4,
+            "RC": 6.7,
+            "MBPP*": 36.2,
+            "Readability": 17.3
+        },
+        "maintainability": {
+            "MI*": 3.0,
+            "MI_p": 2.0,
+            "MI": 85.3,
+            "MC*": 7.2,
+            "MC_p": 5.4,
+            "MC": 2.2,
+            "Maintainability": 43.8
+        },
+        "efficiency": {
+            "E*": 17.8,
+            "E_p": 11.9,
+            "E_NI_T": 12.0,
+            "E_NI_S": 14.4,
+            "Efficiency": 13.2
+        },
+        "correctness": {
+            "Correctness": 19.2
+        },
+        "overall": {
+            "RACE Score": 23.4
+        }
+    },
+    "deepseek-coder-6.7b-instruct": {
+        "readability": {
+            "R*": 65.2,
+            "RN_p": 65.5,
+            "RN_if": 67.2,
+            "RN": 44.4,
+            "RL_p": 61.2,
+            "RL_if": 73.6,
+            "RL": 46.6,
+            "RC_p": 61.2,
+            "RC_if": 65.5,
+            "RC": 42.0,
+            "MBPP*": 57.1,
+            "Readability": 44.3
+        },
+        "maintainability": {
+            "MI*": 26.0,
+            "MI_p": 25.0,
+            "MI": 79.3,
+            "MC*": 18.9,
+            "MC_p": 18.7,
+            "MC": 8.2,
+            "Maintainability": 43.8
+        },
+        "efficiency": {
+            "E*": 28.7,
+            "E_p": 30.7,
+            "E_NI_T": 27.1,
+            "E_NI_S": 30.0,
+            "Efficiency": 28.6
+        },
+        "correctness": {
+            "Correctness": 39.2
+        },
+        "overall": {
+            "RACE Score": 39.0
+        }
+    },
+    "deepseek-coder-7b-instruct-v1.5": {
+        "readability": {
+            "R*": 61.0,
+            "RN_p": 61.5,
+            "RN_if": 57.8,
+            "RN": 35.2,
+            "RL_p": 62.6,
+            "RL_if": 70.9,
+            "RL": 46.0,
+            "RC_p": 62.8,
+            "RC_if": 70.2,
+            "RC": 46.0,
+            "MBPP*": 59.3,
+            "Readability": 42.4
+        },
+        "maintainability": {
+            "MI*": 23.0,
+            "MI_p": 24.0,
+            "MI": 79.6,
+            "MC*": 23.3,
+            "MC_p": 20.9,
+            "MC": 8.9,
+            "Maintainability": 44.2
+        },
+        "efficiency": {
+            "E*": 32.7,
+            "E_p": 27.7,
+            "E_NI_T": 25.1,
+            "E_NI_S": 26.8,
+            "Efficiency": 26.0
+        },
+        "correctness": {
+            "Correctness": 39.9
+        },
+        "overall": {
+            "RACE Score": 38.1
+        }
+    },
+    "deepseek-coder-33b-instruct": {
+        "readability": {
+            "R*": 65.9,
+            "RN_p": 64.6,
+            "RN_if": 86.8,
+            "RN": 57.7,
+            "RL_p": 65.0,
+            "RL_if": 82.7,
+            "RL": 53.5,
+            "RC_p": 66.5,
+            "RC_if": 70.8,
+            "RC": 46.4,
+            "MBPP*": 61.9,
+            "Readability": 52.5
+        },
+        "maintainability": {
+            "MI*": 28.0,
+            "MI_p": 30.0,
+            "MI": 75.7,
+            "MC*": 22.2,
+            "MC_p": 27.6,
+            "MC": 11.3,
+            "Maintainability": 43.5
+        },
+        "efficiency": {
+            "E*": 45.5,
+            "E_p": 38.6,
+            "E_NI_T": 35.3,
+            "E_NI_S": 36.1,
+            "Efficiency": 35.7
+        },
+        "correctness": {
+            "Correctness": 44.7
+        },
+        "overall": {
+            "RACE Score": 44.1
+        }
+    },
+    "DeepSeek-Coder-V2-Lite-Instruct": {
+        "readability": {
+            "R*": 72.0,
+            "RN_p": 71.2,
+            "RN_if": 55.3,
+            "RN": 40.2,
+            "RL_p": 66.5,
+            "RL_if": 83.7,
+            "RL": 57.7,
+            "RC_p": 67.1,
+            "RC_if": 63.5,
+            "RC": 42.7,
+            "MBPP*": 62.7,
+            "Readability": 46.9
+        },
+        "maintainability": {
+            "MI*": 26.0,
+            "MI_p": 30.0,
+            "MI": 78.2,
+            "MC*": 44.4,
+            "MC_p": 44.3,
+            "MC": 19.8,
+            "Maintainability": 49.0
+        },
+        "efficiency": {
+            "E*": 49.5,
+            "E_p": 55.4,
+            "E_NI_T": 40.2,
+            "E_NI_S": 47.7,
+            "Efficiency": 44.0
+        },
+        "correctness": {
+            "Correctness": 50.9
+        },
+        "overall": {
+            "RACE Score": 47.7
+        }
+    },
+    "deepseek-coder": {
+        "readability": {
+            "R*": 73.8,
+            "RN_p": 75.3,
+            "RN_if": 91.8,
+            "RN": 70.0,
+            "RL_p": 75.2,
+            "RL_if": 88.4,
+            "RL": 67.1,
+            "RC_p": 76.5,
+            "RC_if": 74.1,
+            "RC": 58.5,
+            "MBPP*": 68.5,
+            "Readability": 65.2
+        },
+        "maintainability": {
+            "MI*": 35.0,
+            "MI_p": 38.0,
+            "MI": 77.3,
+            "MC*": 58.9,
+            "MC_p": 58.9,
+            "MC": 35.0,
+            "Maintainability": 56.1
+        },
+        "efficiency": {
+            "E*": 57.3,
+            "E_p": 53.5,
+            "E_NI_T": 41.1,
+            "E_NI_S": 49.4,
+            "Efficiency": 45.2
+        },
+        "correctness": {
+            "Correctness": 58.7
+        },
+        "overall": {
+            "RACE Score": 56.3
+        }
+    },
+    "WizardCoder-Python-7B-V1.0": {
+        "readability": {
+            "R*": 34.8,
+            "RN_p": 35.8,
+            "RN_if": 58.3,
+            "RN": 22.4,
+            "RL_p": 34.3,
+            "RL_if": 79.7,
+            "RL": 28.0,
+            "RC_p": 35.4,
+            "RC_if": 25.0,
+            "RC": 8.6,
+            "MBPP*": 41.8,
+            "Readability": 19.7
+        },
+        "maintainability": {
+            "MI*": 19.0,
+            "MI_p": 23.0,
+            "MI": 79.3,
+            "MC*": 10.6,
+            "MC_p": 9.8,
+            "MC": 7.2,
+            "Maintainability": 43.2
+        },
+        "efficiency": {
+            "E*": 19.8,
+            "E_p": 19.8,
+            "E_NI_T": 15.3,
+            "E_NI_S": 16.7,
+            "Efficiency": 16.0
+        },
+        "correctness": {
+            "Correctness": 25.2
+        },
+        "overall": {
+            "RACE Score": 26.0
+        }
+    },
+    "WizardCoder-Python-13B-V1.0": {
+        "readability": {
+            "R*": 36.0,
+            "RN_p": 38.2,
+            "RN_if": 58.4,
+            "RN": 23.1,
+            "RL_p": 38.4,
+            "RL_if": 83.1,
+            "RL": 33.1,
+            "RC_p": 43.6,
+            "RC_if": 59.8,
+            "RC": 27.4,
+            "MBPP*": 42.1,
+            "Readability": 27.9
+        },
+        "maintainability": {
+            "MI*": 20.0,
+            "MI_p": 21.0,
+            "MI": 78.8,
+            "MC*": 12.8,
+            "MC_p": 12.8,
+            "MC": 8.5,
+            "Maintainability": 43.6
+        },
+        "efficiency": {
+            "E*": 20.8,
+            "E_p": 18.8,
+            "E_NI_T": 16.2,
+            "E_NI_S": 19.8,
+            "Efficiency": 18.0
+        },
+        "correctness": {
+            "Correctness": 26.3
+        },
+        "overall": {
+            "RACE Score": 29.0
+        }
+    },
+    "WizardCoder-15B-V1.0": {
+        "readability": {
+            "R*": 38.4,
+            "RN_p": 38.7,
+            "RN_if": 59.0,
+            "RN": 23.2,
+            "RL_p": 41.9,
+            "RL_if": 64.8,
+            "RL": 27.8,
+            "RC_p": 40.0,
+            "RC_if": 57.3,
+            "RC": 24.4,
+            "MBPP*": 46.3,
+            "Readability": 25.1
+        },
+        "maintainability": {
+            "MI*": 22.0,
+            "MI_p": 21.0,
+            "MI": 80.0,
+            "MC*": 11.7,
+            "MC_p": 11.5,
+            "MC": 7.8,
+            "Maintainability": 43.9
+        },
+        "efficiency": {
+            "E*": 21.8,
+            "E_p": 22.8,
+            "E_NI_T": 21.8,
+            "E_NI_S": 24.2,
+            "Efficiency": 23.0
+        },
+        "correctness": {
+            "Correctness": 28.0
+        },
+        "overall": {
+            "RACE Score": 30.0
+        }
+    },
+    "WizardCoder-33B-V1.1": {
+        "readability": {
+            "R*": 58.5,
+            "RN_p": 58.8,
+            "RN_if": 65.4,
+            "RN": 39.9,
+            "RL_p": 62.2,
+            "RL_if": 76.0,
+            "RL": 47.6,
+            "RC_p": 58.8,
+            "RC_if": 61.0,
+            "RC": 37.2,
+            "MBPP*": 64.6,
+            "Readability": 41.6
+        },
+        "maintainability": {
+            "MI*": 34.0,
+            "MI_p": 34.0,
+            "MI": 71.2,
+            "MC*": 26.1,
+            "MC_p": 25.0,
+            "MC": 9.3,
+            "Maintainability": 40.2
+        },
+        "efficiency": {
+            "E*": 38.6,
+            "E_p": 35.6,
+            "E_NI_T": 33.9,
+            "E_NI_S": 34.9,
+            "Efficiency": 34.4
+        },
+        "correctness": {
+            "Correctness": 44.4
+        },
+        "overall": {
+            "RACE Score": 40.1
+        }
+    },
+    "CodeQwen1.5-7B-Chat": {
+        "readability": {
+            "R*": 76.2,
+            "RN_p": 76.8,
+            "RN_if": 60.8,
+            "RN": 47.0,
+            "RL_p": 73.4,
+            "RL_if": 60.8,
+            "RL": 47.0,
+            "RC_p": 74.7,
+            "RC_if": 71.3,
+            "RC": 54.2,
+            "MBPP*": 60.3,
+            "Readability": 49.4
+        },
+        "maintainability": {
+            "MI*": 22.0,
+            "MI_p": 22.0,
+            "MI": 82.3,
+            "MC*": 33.3,
+            "MC_p": 32.6,
+            "MC": 13.0,
+            "Maintainability": 47.6
+        },
+        "efficiency": {
+            "E*": 39.6,
+            "E_p": 38.6,
+            "E_NI_T": 30.7,
+            "E_NI_S": 37.7,
+            "Efficiency": 34.2
+        },
+        "correctness": {
+            "Correctness": 46.3
+        },
+        "overall": {
+            "RACE Score": 44.4
+        }
+    }
+}

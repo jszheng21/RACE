@@ -1,0 +1,10 @@
+openai
+rich
+tenacity
+transformers
+accelerate
+vllm
+anthropic
+mistralai
+stop-sequencer
+torch
