@@ -158,8 +158,9 @@ def output_readability(model, output_path_root):
             mbpp_total_cnt += 1
     tmp_dict['MBPP*'] = round(mbpp_correct_cnt / mbpp_total_cnt * 100, 1)
             
-    final_results[model]['readability'] = tmp_dict
+    tmp_dict['Readability'] = round((tmp_dict['RN'] + tmp_dict['RL'] + tmp_dict['RC']) / 3, 1)
     
+    final_results[model]['readability'] = tmp_dict
     print(final_results)
 
 

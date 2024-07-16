@@ -4,9 +4,10 @@ from race.codeeval.evaluate_pipeline_classeval import EvaluatePipeline
 from race.codeeval.evaluate_pipeline_leetcode_style import EvaluateLeetcodeStylePipeline
 
 
-def output_maintainability_mi(model, output_path_root):
+def output_maintainability(model, output_path_root):
     final_results = {model: {'maintainability': {}}}
     
+    # For `Maintainability (MI Metric)`
     dim = 'correctness'
     pipeline = EvaluatePipeline(model_name=model,
                                 generated_data_path=os.path.join(output_path_root, f'classeval_{dim}_{model}.jsonl'),
@@ -23,19 +24,14 @@ def output_maintainability_mi(model, output_path_root):
     
     final_results[model]['maintainability']['MI*'] = result_p
     final_results[model]['maintainability']['MI'] = result_mi
-        
-    print(final_results)
-        
-
-def output_maintainability_module_count(model, output_path_root):
+    
+    # For `Maintainability (Modularity)`
     dims = [
         'correctness',
         'maintainability_module_count_1', 
         'maintainability_module_count_2', 
         'maintainability_module_count_3',
     ]
-
-    final_results = {model: {'maintainability': {}}}
 
     result_p = 0
     total_result_p_if = 0
@@ -56,13 +52,11 @@ def output_maintainability_module_count(model, output_path_root):
         
     final_results[model]['maintainability']['MC*'] = round(result_p, 1)
     final_results[model]['maintainability']['MC'] = round(total_result_p_if / 3, 1)
+    
+    overall_maintainability = round((final_results[model]['maintainability']['MI'] + final_results[model]['maintainability']['MC']) / 2, 1)
+    final_results[model]['maintainability']['Maintainability'] = overall_maintainability
         
     print(final_results)
-
-
-def output_maintainability(model, output_path_root):
-    output_maintainability_mi(model, output_path_root)
-    output_maintainability_module_count(model, output_path_root)
 
 
 if __name__ == '__main__':
