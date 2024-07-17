@@ -32,9 +32,15 @@ To start, please run the following to prepare the environment:
 pip install -e .
 ```
 
+To use vllm, please run the following command.
+
+```bash
+pip install -e .[vllm_gen]
+```
+
 ### Code Generation
 
-Take `Readability` as an example, use the following command to generate code samples from a model, which are saved in the JSON Lines (jsonl) format.
+Take `Readability` as an example, use the following command to generate code samples from a model, which are saved in the JSON Lines (jsonl) format. `root` refers to the directory of the output files.
 
 ```bash
 python scripts/gen_readability.py \
