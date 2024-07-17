@@ -40,15 +40,10 @@ pip install -e .[vllm_gen]
 
 ### Code Generation
 
-Take `Readability` as an example, use the following command to generate code samples from a model, which are saved in the JSON Lines (jsonl) format. `root` refers to the directory of the output files.
+Take `Readability` as an example, use the following command to generate code samples from a model, which are saved in the JSON Lines (jsonl) format. `root` refers to the directory of the output files, and `backend` supports `openai` and `vllm`. To use backend `openai`, please ensure that environment variables `${API_BASE}` and `${API_KEY}` are configured.
 
 ```bash
-python scripts/gen_readability.py \
-    --model ${model}$ \
-    --root "./outputs" \
-    --backend [openai|vllm] \
-    --API_BASE ${API_BASE} \
-    --API_KEY ${API_KEY}
+scripts/gen_readability.sh ${model} ${root} ${backend}
 ```
 
 <details><summary>⏬ More commands for other dimensions.<i>:: click to expand ::</i></summary>
@@ -56,28 +51,13 @@ python scripts/gen_readability.py \
 
 ```bash
 # For `Correctness`
-python scripts/gen_correctness.py \
-    --model ${model}$ \
-    --root "./outputs" \
-    --backend [openai|vllm] \
-    --API_BASE ${API_BASE} \
-    --API_KEY ${API_KEY}
+scripts/gen_correctness.sh ${model} ${root} ${backend}
 
 # For `Maintainability`
-python scripts/gen_maintainability.py \
-    --model ${model}$ \
-    --root "./outputs" \
-    --backend [openai|vllm] \
-    --API_BASE ${API_BASE} \
-    --API_KEY ${API_KEY}
+scripts/gen_maintainability.sh ${model} ${root} ${backend}
 
 # For `Efficiency`
-python scripts/gen_efficiency.py \
-    --model ${model}$ \
-    --root "./outputs" \
-    --backend [openai|vllm] \
-    --API_BASE ${API_BASE} \
-    --API_KEY ${API_KEY}
+scripts/gen_efficiency.sh ${model} ${root} ${backend}
 ```
 
 </div>
@@ -108,7 +88,7 @@ docker build --rm -f "./Dockerfile" -t race:latest "."
 Then, using code readability as an example, test the correctness of the LLM-generated code based on test cases. In this context, the evaluation of the generated code under the dimension of `correctness` is distributed across the dimensions of code `readability`, `maintainability`, and `efficiency`.
 
 ```bash
-./eval_c_readability.sh ${model} ${root}
+scripts/eval_c_readability.sh ${model} ${root}
 ```
 
 <details><summary>⏬ More commands for other dimensions.<i>:: click to expand ::</i></summary>
@@ -116,10 +96,10 @@ Then, using code readability as an example, test the correctness of the LLM-gene
 
 ```bash
 # For `Readability`
-./eval_c_maintainability.sh ${model} ${root}
+scripts/eval_c_maintainability.sh ${model} ${root}
 
 # For `Efficiency`
-./eval_c_efficiency.sh ${model} ${root}
+scripts/eval_c_efficiency.sh ${model} ${root}
 ```
 
 Here are further details on how to evaluate the correctness of LLM-generated code under a single factor.
