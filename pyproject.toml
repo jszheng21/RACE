@@ -41,7 +41,7 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 vllm_gen = [
-    "vllm",
+    "vllm==0.5.0",
     "stop_sequencer"
 ]
 
