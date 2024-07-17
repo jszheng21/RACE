@@ -20,7 +20,14 @@ def generate(model, root, backend, API_BASE=None, API_KEY=None):
                                     api_key=API_KEY,)
 
 
-        pipeline.pipeline_simple()
+        if dataset == 'classeval':
+            pipeline.pipeline_classeval(generation_strategy='holistic')
+        elif dataset == 'leetcode':
+            pipeline.pipeline_leetcode()
+        elif dataset == 'leetcode_efficiency':
+            pipeline.pipeline_leetcode_efficiency()
+        else:
+            pipeline.pipeline_simple()
 
 
 if __name__ == '__main__':
