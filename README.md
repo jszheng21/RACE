@@ -1,14 +1,16 @@
-# RACE(🏎️)
+# RACEcode(🏎️)
 
 <p align="center">
     <a href="https://huggingface.co/spaces/jszheng/RACE_leaderboard"><img src="https://img.shields.io/badge/%F0%9F%8F%86-leaderboard-8A2BE2"></a>
-    <a href="https://github.com/jszheng21/RACE/LICENSE"><img src="https://img.shields.io/pypi/l/evalplus"></a>
+    <a href="https://arxiv.org/abs/2407.11470"><img src="https://img.shields.io/badge/arXiv-2407.11470-b31b1b.svg"></a>
+    <a href="https://github.com/jszheng21/RACE/blob/main/LICENSE"><img src="https://img.shields.io/pypi/l/evalplus"></a>
 </p>
 
 
 <p align="center">
+    <a href="https://huggingface.co/spaces/jszheng/RACE_leaderboard">🏆Leaderboard</a> •
     <a href="#-quick-start">🔥Quick Start</a> •
-    <a href="#-useful-tools">🔨Tools</a> •
+    <a href="#-issues">🐛Issues</a> •
     <a href="#-citation">📜Citation</a> •
     <a href="#-acknowledgement">🙏Acknowledgement</a>
 </p>
@@ -20,7 +22,7 @@ RACE is a multi-dimensional benchmark for code generation that focuses on **R**e
 
 ![overview](assets/race_overview.jpg)
 
-The overall evaluation pipeline is shown as the above. Firstly, we summarize multiple representative factors for each dimension based on their respective quality definitions. Secondly, we design several reasonable customized requirements for each factor and integrate them into task descriptions, requiring the model to generate code that is both correct and meets these requirements. Finally, leveraging static analysis and runtime monitoring techniques, we develop evaluation metrics tailored to each factor to achieve accurate and efficient evaluation. 
+The overall evaluation pipeline is shown as the above. Firstly, we summarize multiple representative factors for each dimension based on their respective quality definitions. Secondly, we design several reasonable customized requirements for each factor and integrate them into task descriptions, requiring the model to generate code that is both correct and meets these requirements. Finally, leveraging static analysis and runtime monitoring techniques, we develop evaluation metrics tailored to each factor to achieve accurate and efficient evaluation. Read our paper [**Beyond Correctness: Benchmarking Multi-dimensional Code Generation for Large Language Models**](https://arxiv.org/abs/2407.11470) [![](https://img.shields.io/badge/arXiv-2407.11470-b31b1b.svg)](https://arxiv.org/abs/2407.11470) to get further information.
 
 ## 🔥 Quick Start
 
@@ -47,6 +49,14 @@ python scripts/gen_readability.py \
 <div>
 
 ```bash
+# For `Correctness`
+python scripts/gen_correctness.py \
+    --model ${model}$ \
+    --root "./outputs" \
+    --backend [openai|vllm] \
+    --API_BASE ${API_BASE} \
+    --API_KEY ${API_KEY}
+
 # For `Maintainability`
 python scripts/gen_maintainability.py \
     --model ${model}$ \
@@ -81,16 +91,18 @@ python scripts/parse_generated_file.py \
 
 ### Code Evaluation
 
+The evaluation of generated code is divided into two parts: 1) assesses the correctness of the generated code; 2) evaluates various non-execution-based metrics.
+
 First, build the docker image as an environment for evaluating the code by execution.
 
 ```bash
 docker build --rm -f "./Dockerfile" -t race:latest "."
 ```
 
-Then, using code readability as an example, test the correctness of the LLM-generated code based on test cases.
+Then, using code readability as an example, test the correctness of the LLM-generated code based on test cases. In this context, the evaluation of the generated code under the dimension of `correctness` is distributed across the dimensions of code `readability`, `maintainability`, and `efficiency`.
 
 ```bash
-./eval_readability.sh ${model} ${root}
+./eval_c_readability.sh ${model} ${root}
 ```
 
 <details><summary>⏬ More commands for other dimensions.<i>:: click to expand ::</i></summary>
@@ -98,13 +110,13 @@ Then, using code readability as an example, test the correctness of the LLM-gene
 
 ```bash
 # For `Readability`
-./eval_maintainability.sh ${model} ${root}
+./eval_c_maintainability.sh ${model} ${root}
 
 # For `Efficiency`
-./eval_efficiency.sh ${model} ${root}
+./eval_c_efficiency.sh ${model} ${root}
 ```
 
-More details about testing a single model on a single factor.
+Here are further details on how to evaluate the correctness of LLM-generated code under a single factor.
 
 ```bash
 # For `Readability`
@@ -151,6 +163,11 @@ python scripts/get_metric_readability.py \
 <div>
 
 ```bash
+# For `Correctness`
+python scripts/get_metric_correctness.py \
+    --model ${model} \
+    --output_path_root ${root}
+
 # For `Maintainability`
 python scripts/get_metric_maintainability.py \
     --model ${model} \
@@ -166,7 +183,7 @@ python scripts/get_metric_efficiency.py \
 </details>
 
 
-## Issues
+## 🐛 Issues
 
 In order to use vllm to accelerate the DeepSeek-Coder-V2 inference process, additional branch versions need to be installed (https://github.com/zwd003/vllm)
 
@@ -174,11 +191,19 @@ In order to use vllm to accelerate the DeepSeek-Coder-V2 inference process, addi
 ## 📜 Citation
 
 ```bibtex
-
+@misc{zheng2024race,
+      title={Beyond Correctness: Benchmarking Multi-dimensional Code Generation for Large Language Models}, 
+      author={Jiasheng Zheng and Boxi Cao and Zhengzhao Ma and Ruotong Pan and Hongyu Lin and Yaojie Lu and Xianpei Han and Le Sun},
+      year={2024},
+      eprint={2407.11470},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2407.11470}, 
+}
 ```
 
 ## 🙏 Acknowledgement
 
+- [EvalPlus](https://github.com/evalplus/evalplus)
 - [HumanEval](https://github.com/openai/human-eval)
 - [MBPP](https://github.com/google-research/google-research/tree/master/mbpp)
-- [EvalPlus](https://github.com/evalplus/evalplus)
