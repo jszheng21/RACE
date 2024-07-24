@@ -162,3 +162,11 @@ cython_debug/
 
 # VSCode
 .vscode/
+outputs/
+misc/
+race/_version.py
+
+assets/
+data/
+scripts/
+
