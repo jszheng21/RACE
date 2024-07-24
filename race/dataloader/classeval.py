@@ -27,10 +27,13 @@ def get_class_eval(local_path=None) -> Dict[str, Dict]:
     """
     if local_path is None:
         # Check if data file exists in CACHE_DIR
-        url = 'https://github.com/FudanSELab/ClassEval/raw/master/data/ClassEval_data.json'
+        
+        # Due to changes in the ClassEval_data version, use a fixed and uniform version
+        # url_latest = 'https://github.com/FudanSELab/ClassEval/raw/master/data/ClassEval_data.json'
+        url_fix_version = 'https://github.com/FudanSELab/ClassEval/raw/8ac9909c134b3cd760774cb7bb8d34202f47786a/data/ClassEval_data.json'
         data_path = os.path.join(CACHE_DIR, "ClassEval_data.json")
 
-        make_cache(url, data_path)
+        make_cache(url_fix_version, data_path)
     else:
         assert os.path.exists(local_path), f"File not found: {local_path}"
         print(f"Loading dataset from {local_path}")
