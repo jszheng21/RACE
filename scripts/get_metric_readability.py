@@ -162,6 +162,8 @@ def output_readability(model, output_path_root):
     
     final_results[model]['readability'] = tmp_dict
     print(final_results)
+    
+    return final_results
 
 
 if __name__ == '__main__':

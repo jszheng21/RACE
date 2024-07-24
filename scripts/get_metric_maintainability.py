@@ -20,9 +20,11 @@ def output_maintainability(model, output_path_root):
                                 generated_data_path=os.path.join(output_path_root, f'classeval_{dim}_{model}.jsonl'),
                                 root=output_path_root)
     model_list = [model]
+    result_p_mi = round((pipeline.cal_metrics_pass_at_k(model_list, 1, 1)[model]['class_success'] * 100), 1)
     result_mi = pipeline.evaluate_pipeline_mi()
     
     final_results[model]['maintainability']['MI*'] = result_p
+    final_results[model]['maintainability']['MI_p'] = result_p_mi
     final_results[model]['maintainability']['MI'] = result_mi
     
     # For `Maintainability (Modularity)`
@@ -35,6 +37,7 @@ def output_maintainability(model, output_path_root):
 
     result_p = 0
     total_result_p_if = 0
+    total_result_p_m = 0
     for i in range(len(dims)):
         dim = dims[i]
         pipeline = EvaluateLeetcodeStylePipeline(model_name=model,
@@ -47,16 +50,20 @@ def output_maintainability(model, output_path_root):
         if dim == 'correctness':
             result_p = pipeline.evaluate_pipeline_correctness()
         else:
-            _, _, result_p_if = pipeline.evaluate_pipeline_maintainability_module_count(int(dim[-1]))
+            result_p_m, _, result_p_if = pipeline.evaluate_pipeline_maintainability_module_count(int(dim[-1]))
             total_result_p_if += result_p_if
+            total_result_p_m += result_p_m
         
     final_results[model]['maintainability']['MC*'] = round(result_p, 1)
+    final_results[model]['maintainability']['MC_p'] = round(total_result_p_m / 3, 1)
     final_results[model]['maintainability']['MC'] = round(total_result_p_if / 3, 1)
     
     overall_maintainability = round((final_results[model]['maintainability']['MI'] + final_results[model]['maintainability']['MC']) / 2, 1)
     final_results[model]['maintainability']['Maintainability'] = overall_maintainability
         
     print(final_results)
+    
+    return final_results
 
 
 if __name__ == '__main__':

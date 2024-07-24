@@ -22,14 +22,17 @@ def output_efficiency(model, output_path_root):
                                              generated_data_path=os.path.join(output_path_root, f'leetcode_efficiency_{dim}_{model}_parsed.jsonl'),
                                              result_path=os.path.join(output_path_root, f'leetcode_efficiency_{dim}_{model}_parsed_results.jsonl'),
                                              temp_path=output_path_root)
-    _, result_ni_t, result_ni_s = pipeline.evaluate_pipeline_complexity()
+    result_p_e, result_ni_t, result_ni_s = pipeline.evaluate_pipeline_complexity()
 
     final_results[model]['efficiency']['E*'] = result_p
+    final_results[model]['efficiency']['E_p'] = result_p_e
     final_results[model]['efficiency']['E_NI_T'] = result_ni_t
     final_results[model]['efficiency']['E_NI_S'] = result_ni_s
     final_results[model]['efficiency']['Efficiency'] = round((result_ni_t + result_ni_s) / 2, 1)
 
     print(final_results)
+    
+    return final_results
 
 
 if __name__ == '__main__':

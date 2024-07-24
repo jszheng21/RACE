@@ -5,7 +5,7 @@ from race.codeeval.evaluate_pipeline_classeval import EvaluatePipeline
 from race.codeeval.evaluate_pipeline_leetcode_style import EvaluateLeetcodeStylePipeline
 
 
-def output_readability(model, output_path_root):
+def output_correctness(model, output_path_root):
     final_results = {model: {'correctness': {}}}
     
     dim = 'correctness'
@@ -76,7 +76,9 @@ def output_readability(model, output_path_root):
     values = final_results[model]['correctness'].values()
     final_results[model]['correctness']['Correctness'] = round(sum(values) / len(values), 1)
     print(final_results)
+    
+    return final_results
 
 if __name__ == '__main__':
-    fire.Fire(output_readability)
+    fire.Fire(output_correctness)
     
