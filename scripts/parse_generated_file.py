@@ -18,10 +18,15 @@ def parse(generated_file_path, model):
             for_completion_model = False
             if 'python' in model.lower():
                 for_completion_model = True
-
-            only_second_stage = False
-            if 'wizard' in model.lower():
+                
+            if 'leetcode' in generated_file_path:
+                only_second_stage = False
+                if 'wizard' in model.lower():
+                    only_second_stage = True
+            elif 'humaneval' in generated_file_path or 'mbpp' in generated_file_path:
                 only_second_stage = True
+                if 'gpt' in model.lower() or model == 'DeepSeek-Coder-V2-Instruct' or 'claude' in model.lower():
+                    only_second_stage = False
                 
             line['solution'] = parse_code(line['solution'], only_second_stage, for_completion_model)
             
