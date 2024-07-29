@@ -30,6 +30,8 @@ The overall evaluation pipeline is shown as the above. Firstly, we summarize mul
 - [24/07/24] We add the evaluation results of `claude-3.5-sonnet` and `Qwen2-72B-Instruct` in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
 - [24/07/16] We release our RACE benchmark, leaderboard and paper.
 
+---
+
 ## 🔥 Quick Start
 
 To start, please run the following to prepare the environment:
@@ -101,7 +103,7 @@ scripts/eval_c_readability.sh ${model} ${root}
 <div>
 
 ```bash
-# For `Readability`
+# For `Maintainability`
 scripts/eval_c_maintainability.sh ${model} ${root}
 
 # For `Efficiency`
