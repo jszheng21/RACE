@@ -4,3 +4,4 @@ from race.dataloader.utils import load_solutions, write_directory, write_jsonl
 from race.dataloader.classeval import get_class_eval
 from race.dataloader.leetcode import get_leetcode
 from race.dataloader.leetcode_efficiency import get_leetcode_efficiency
+from race.dataloader.leetcode_efficiency_complex_problem import get_leetcode_efficiency_complex_problem

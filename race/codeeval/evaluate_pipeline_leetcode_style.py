@@ -19,6 +19,7 @@ class EvaluateLeetcodeStylePipeline():
         root=None,
         timeout=60,
         num_process_evaluate=16,
+        change_to_snake_case=False,
     ):
         self.model_name = model_name
         self.evaluation_test_case_path = evaluation_test_case_path
@@ -29,6 +30,7 @@ class EvaluateLeetcodeStylePipeline():
         self.root = root
         self.timeout = timeout
         self.num_process_evaluate = num_process_evaluate
+        self.change_to_snake_case = change_to_snake_case
 
     def load_problems(self, evaluation_test_case_path):
         if not evaluation_test_case_path.endswith('.jsonl'):
@@ -77,7 +79,11 @@ class EvaluateLeetcodeStylePipeline():
         )
 
     def test_pipeline_complexity(self):
-        test_time_and_memory_usage(self.evaluation_test_case_path, self.generated_data_path, self.result_path, self.timeout)
+        test_time_and_memory_usage(self.evaluation_test_case_path, 
+                                   self.generated_data_path, 
+                                   self.result_path, 
+                                   self.timeout, 
+                                   self.change_to_snake_case)
 
     def evaluate_pipeline(self):
         hardness_results = defaultdict(int)

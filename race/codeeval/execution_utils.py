@@ -185,7 +185,10 @@ IMPORT_HELPER = {
 }
 
 
-def test_time_and_memory_usage(evaluation_test_case_path, generated_data_path, output_result_path, timeout):
+def test_time_and_memory_usage(evaluation_test_case_path, generated_data_path, output_result_path, timeout, change_to_snake_case=False):
+    def camel_to_snake(name):
+        return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
+
     space_timeout = timeout * 3
     output_results = []
     print(f'{"Start testing time usage and memory usage":-^100}')
@@ -221,7 +224,12 @@ def test_time_and_memory_usage(evaluation_test_case_path, generated_data_path, o
             exec(test_string, exec_globals)
             
             instance = exec_globals['Solution']()
-            method = getattr(instance, problems[sample['task_id']]['entry_point'])
+            
+            if change_to_snake_case:
+                entry_point = camel_to_snake(problems[sample['task_id']]['entry_point'])
+            else:
+                entry_point = problems[sample['task_id']]['entry_point']
+            method = getattr(instance, entry_point)
 
             # Test time usage
             passed = True
