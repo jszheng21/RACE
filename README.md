@@ -1,4 +1,8 @@
-# RACEcode(🏎️)
+<p align="center">
+    <a href="https://arxiv.org/abs/2407.11470">
+        <img src="assets/logo.jpg" width="100%" alt="race benchmark logo" />
+    </a>
+</p>
 
 <p align="center">
     <a href="https://huggingface.co/spaces/jszheng/RACE_leaderboard"><img src="https://img.shields.io/badge/%F0%9F%8F%86-leaderboard-8A2BE2"></a>
@@ -15,6 +19,16 @@
     <a href="#-acknowledgement">🙏Acknowledgement</a>
 </p>
 
+---
+
+**_Latest News_** 🔥
+- [24/10/09] We release the second version of [RACE paper](https://arxiv.org/abs/2407.11470).
+- [24/10/09] We add the evaluation results of 9 LLMs (including `o1-mini-2024-09-12`) in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
+- [24/10/01] We have improved the calculation methods for readability-related metrics and enhanced the robustness of the code post-processing techniques.
+- [24/10/01] We have revised the test code in the LeetCode evaluation data to support the cases with multiple correct answers.
+- [24/07/24] We add the evaluation results of `claude-3.5-sonnet` and `Qwen2-72B-Instruct` in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
+- [24/07/16] We release our RACE benchmark, leaderboard and paper.
+
 
 ## 🏎️ About
 
@@ -24,17 +38,6 @@ RACE is a multi-dimensional benchmark for code generation that focuses on **R**e
 
 The overall evaluation pipeline is shown as the above. Firstly, we summarize multiple representative factors for each dimension based on their respective quality definitions. Secondly, we design several reasonable customized requirements for each factor and integrate them into task descriptions, requiring the model to generate code that is both correct and meets these requirements. Finally, leveraging static analysis and runtime monitoring techniques, we develop evaluation metrics tailored to each factor to achieve accurate and efficient evaluation. Read our paper [**Beyond Correctness: Benchmarking Multi-dimensional Code Generation for Large Language Models**](https://arxiv.org/abs/2407.11470) to get further information.
 
----
-
-**_Latest News_**
-- [24/10/09] We release the second version of [RACE paper](https://arxiv.org/abs/2407.11470).
-- [24/10/09] We add the evaluation results of 9 LLMs (including `o1-mini-2024-09-12`) in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
-- [24/10/01] We have improved the calculation methods for readability-related metrics and enhanced the robustness of the code post-processing techniques.
-- [24/10/01] We have revised the test code in the LeetCode evaluation data to support the cases with multiple correct answers.
-- [24/07/24] We add the evaluation results of `claude-3.5-sonnet` and `Qwen2-72B-Instruct` in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
-- [24/07/16] We release our RACE benchmark, leaderboard and paper.
-
----
 
 ## 🔥 Quick Start
 
