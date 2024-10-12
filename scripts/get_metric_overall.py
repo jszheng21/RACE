@@ -8,7 +8,7 @@ from get_metric_efficiency import output_efficiency
 
 def output_overall(model, output_path_root):
     r1 = output_correctness(model, output_path_root)
-    r2 = output_readability(model, output_path_root)
+    r2, _ = output_readability(model, output_path_root)
     r3 = output_maintainability(model, output_path_root)
     r4 = output_efficiency(model, output_path_root)
 
@@ -22,6 +22,8 @@ def output_overall(model, output_path_root):
     final_results[model]['overall']['RACE Score'] = round(total_overall / 4, 1)
     
     print(json.dumps(final_results, indent=4))
+
+    return final_results
 
 if __name__ == '__main__':
     fire.Fire(output_overall)

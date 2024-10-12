@@ -21,7 +21,7 @@ def output_maintainability(model, output_path_root):
                                 root=output_path_root)
     model_list = [model]
     result_p_mi = round((pipeline.cal_metrics_pass_at_k(model_list, 1, 1)[model]['class_success'] * 100), 1)
-    result_mi = pipeline.evaluate_pipeline_mi()
+    result_mi_if, result_mi = pipeline.evaluate_pipeline_mi()
     
     final_results[model]['maintainability']['MI*'] = result_p
     final_results[model]['maintainability']['MI_p'] = result_p_mi

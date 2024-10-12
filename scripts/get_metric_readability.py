@@ -21,6 +21,29 @@ metrics_mapping = {
     'maintainability_loop_while': partial(metrics_for_maintainability_loop, loop_type='while')
 }
 
+dim2abbr_mapping = {
+    'correctness': 'R*',
+    'readability_name': 'RN',
+    'readability_length': 'RL',
+    'readability_comment': 'RC'
+}
+
+subdim2abbr_mapping = {
+    'correctness': 'C',
+    'readability_name_camel': 'camel',
+    'readability_name_snake': 'snake',
+    'readability_name_function_camel': 'function_camel',
+    'readability_name_function_snake': 'function_snake',
+    'readability_name_var_camel': 'var_camel',
+    'readability_name_var_snake': 'var_snake',
+    'readability_length_setting_1': 'L_60_20',
+    'readability_length_setting_2': 'L_70_30',
+    'readability_length_setting_3': 'L_79_40',
+    'readability_comment_by_function': 'by_function',
+    'readability_comment_by_line': 'by_line',
+    'maintainability_loop_for': 'for',
+    'maintainability_loop_while': 'while'
+}
 
 def output_readability(model, output_path_root):
     dims = [
@@ -36,11 +59,14 @@ def output_readability(model, output_path_root):
         'readability_length_setting_3', 
         'readability_comment_by_function', 
         'readability_comment_by_line', 
+        # 'maintainability_loop_for',
+        # 'maintainability_loop_while'
     ]
     
     dataset = 'humaneval'
 
     final_results = {model: {'readability': {}}}
+    detailed_results = {}
         
     overall = {'correctness': 0, 'readability_name': 0, 'readability_length': 0, 'readability_comment': 0}
     overall_cnt = {'correctness': 0, 'readability_name': 0, 'readability_length': 0, 'readability_comment': 0}
@@ -90,6 +116,13 @@ def output_readability(model, output_path_root):
                     if generated_data_result_mapping[line['task_id']]:
                         correct_pif_cnt += 1
         
+        if dim == 'correctness':
+            detailed_results[subdim2abbr_mapping[dim]] = round(correct_r_p_cnt / overall_total_cnt * 100, 1)
+        else:
+            detailed_results[subdim2abbr_mapping[dim] + '_p'] = round(correct_p_cnt / overall_total_cnt * 100, 1)
+            detailed_results[subdim2abbr_mapping[dim] + '_if'] = round(correct_if_cnt / overall_total_cnt * 100, 1)
+            detailed_results[subdim2abbr_mapping[dim] + '_p_if'] = round(correct_pif_cnt / overall_total_cnt * 100, 1)
+        
         for key in overall.keys():
             if key in dim:
                 if dim == 'correctness':
@@ -106,64 +139,30 @@ def output_readability(model, output_path_root):
                     overall_if_cnt[key] += 1
 
                 break
-            
     
     tmp_dict = {}
     for key in overall.keys():            
         if key in overall_p_cnt and overall_p_cnt[key] > 0:
-            if key == 'readability_name':
-                latest_key = 'RN_p'
-            elif key == 'readability_length':
-                latest_key = 'RL_p'
-            elif key == 'readability_comment':
-                latest_key = 'RC_p'
+            latest_key = dim2abbr_mapping[key] + '_p'
             
             tmp_dict[latest_key] = round(overall_p[key] / overall_p_cnt[key], 1)
             
         if key in overall_if_cnt and overall_if_cnt[key] > 0:
-            if key == 'readability_name':
-                latest_key = 'RN_if'
-            elif key == 'readability_length':
-                latest_key = 'RL_if'
-            elif key == 'readability_comment':
-                latest_key = 'RC_if'
+            latest_key = dim2abbr_mapping[key] + '_if'
                 
             tmp_dict[latest_key] = round(overall_if[key] / overall_if_cnt[key], 1)
         
         if overall_cnt[key] > 0:
-            if key == 'correctness':
-                latest_key = 'R*'
-            elif key == 'readability_name':
-                latest_key = 'RN'
-            elif key == 'readability_length':
-                latest_key = 'RL'
-            elif key == 'readability_comment':
-                latest_key = 'RC'
+            latest_key = dim2abbr_mapping[key]
                 
             tmp_dict[latest_key] = round(overall[key] / overall_cnt[key], 1)
-    
-    dataset = 'mbpp'
-    dim = 'correctness'
-    
-    input_results_file = os.path.join(output_path_root, f'{dataset}_{dim}_{model}_parsed_eval_results.json')
-    with open(input_results_file, 'r') as f:
-        results = json.load(f)
-        mbpp_total_cnt = 0
-        mbpp_correct_cnt = 0
-        for key in results['eval'].keys():
-            is_pass = results['eval'][key][0]['base_status'] == 'pass' and results['eval'][key][0]['plus_status'] == 'pass'
-            generated_data_result_mapping[results['eval'][key][0]['task_id']] = is_pass
-            if is_pass:
-                mbpp_correct_cnt += 1
-            mbpp_total_cnt += 1
-    tmp_dict['MBPP*'] = round(mbpp_correct_cnt / mbpp_total_cnt * 100, 1)
             
     tmp_dict['Readability'] = round((tmp_dict['RN'] + tmp_dict['RL'] + tmp_dict['RC']) / 3, 1)
     
     final_results[model]['readability'] = tmp_dict
     print(final_results)
     
-    return final_results
+    return final_results, detailed_results
 
 
 if __name__ == '__main__':
