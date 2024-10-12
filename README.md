@@ -20,13 +20,17 @@
 
 RACE is a multi-dimensional benchmark for code generation that focuses on **R**eadability, m**A**intainability, **C**orrectness, and **E**fficiency. Its goal is to evaluate LLM's ability to generate code that is correct and meets the requirements of real-world development scenarios. The benchmark is designed with various real-world demands across different **_demand-dependent_** dimensions, making it more applicable to practical scenarios. To facilitate the evaluation of RACE, we provide easy-to-use evaluation scripts, while evaluating in a virtualized environment ensures the security of executing the code.
 
-![overview](assets/race_overview.jpg)
+![overview](assets/race_overview_v2.jpg)
 
-The overall evaluation pipeline is shown as the above. Firstly, we summarize multiple representative factors for each dimension based on their respective quality definitions. Secondly, we design several reasonable customized requirements for each factor and integrate them into task descriptions, requiring the model to generate code that is both correct and meets these requirements. Finally, leveraging static analysis and runtime monitoring techniques, we develop evaluation metrics tailored to each factor to achieve accurate and efficient evaluation. Read our paper [**Beyond Correctness: Benchmarking Multi-dimensional Code Generation for Large Language Models**](https://arxiv.org/abs/2407.11470) [![](https://img.shields.io/badge/arXiv-2407.11470-b31b1b.svg)](https://arxiv.org/abs/2407.11470) to get further information.
+The overall evaluation pipeline is shown as the above. Firstly, we summarize multiple representative factors for each dimension based on their respective quality definitions. Secondly, we design several reasonable customized requirements for each factor and integrate them into task descriptions, requiring the model to generate code that is both correct and meets these requirements. Finally, leveraging static analysis and runtime monitoring techniques, we develop evaluation metrics tailored to each factor to achieve accurate and efficient evaluation. Read our paper [**Beyond Correctness: Benchmarking Multi-dimensional Code Generation for Large Language Models**](https://arxiv.org/abs/2407.11470) to get further information.
 
 ---
 
 **_Latest News_**
+- [24/10/09] We release the second version of [RACE paper](https://arxiv.org/abs/2407.11470).
+- [24/10/09] We add the evaluation results of 9 LLMs (including `o1-mini-2024-09-12`) in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
+- [24/10/01] We have improved the calculation methods for readability-related metrics and enhanced the robustness of the code post-processing techniques.
+- [24/10/01] We have revised the test code in the LeetCode evaluation data to support the cases with multiple correct answers.
 - [24/07/24] We add the evaluation results of `claude-3.5-sonnet` and `Qwen2-72B-Instruct` in [RACE leaderboard](https://huggingface.co/spaces/jszheng/RACE_leaderboard).
 - [24/07/16] We release our RACE benchmark, leaderboard and paper.
 
@@ -108,6 +112,9 @@ scripts/eval_c_maintainability.sh ${model} ${root}
 
 # For `Efficiency`
 scripts/eval_c_efficiency.sh ${model} ${root}
+
+# For only `Correctness`
+scripts/eval_c_correctness.sh ${model} ${root}
 ```
 
 Here are further details on how to evaluate the correctness of LLM-generated code under a single factor.
