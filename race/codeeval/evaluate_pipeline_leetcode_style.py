@@ -106,11 +106,11 @@ class EvaluateLeetcodeStylePipeline():
     def evaluate_pipeline_complexity(self):
         results = [json.loads(line) for line in open(self.result_path, 'r')]
         
-        evaluations = []
+        evaluations = {}
         with open(self.evaluation_efficiency_data_path, 'r') as f:
             for line in f:
                 line = json.loads(line)
-                evaluations.append(line)
+                evaluations[line['task_id'] + line['instruction']] = line
         
         total_time_cnt = 0
         total_space_cnt = 0
@@ -136,11 +136,11 @@ class EvaluateLeetcodeStylePipeline():
                     T_hat = results[i]['running_time']
                     S_hat = results[i]['peak_memory_usage']
                     
-                    T_1 = evaluations[i]['T_1']
-                    T_2 = evaluations[i]['T_2']
+                    T_1 = evaluations[results[i]['task_id'] + results[i]['instruction']]['T_1']
+                    T_2 = evaluations[results[i]['task_id'] + results[i]['instruction']]['T_2']
                     
-                    S_1 = evaluations[i]['S_1']
-                    S_2 = evaluations[i]['S_2']
+                    S_1 = evaluations[results[i]['task_id'] + results[i]['instruction']]['S_1']
+                    S_2 = evaluations[results[i]['task_id'] + results[i]['instruction']]['S_2']
                     
                     to_reverse = 1
                     if T_1 > T_2:
@@ -151,21 +151,16 @@ class EvaluateLeetcodeStylePipeline():
                     total_time_NI += time_NI
                     total_space_NI += space_NI
                     
-                    # TODO
-                    # print(f"{results[i]['task_id']:-^100}")
-                    # print(f'{T_hat} {S_hat}')
-                    # print(f'{T_1} {T_2}  {S_1} {S_2}')
-                    # print(f'{time_NI} {space_NI}')
                 elif 'time' in results[i]['instruction']:
-                    T_1 = evaluations[i]['T_1']
-                    T_2 = evaluations[i]['T_2']
+                    T_1 = evaluations[results[i]['task_id'] + results[i]['instruction']]['T_1']
+                    T_2 = evaluations[results[i]['task_id'] + results[i]['instruction']]['T_2']
                     
                     T_hat = results[i]['running_time']
                     time_NI = 100 * max(min(1 - (T_hat - T_1) / (T_2 - T_1), 1), 0)
                     total_time_NI += time_NI
                 elif 'time' in results[i]['instruction']:
-                    T_1 = evaluations[i]['T_1']
-                    T_2 = evaluations[i]['T_2']
+                    T_1 = evaluations[results[i]['task_id'] + results[i]['instruction']]['T_1']
+                    T_2 = evaluations[results[i]['task_id'] + results[i]['instruction']]['T_2']
                     
                     S_hat = results[i]['peak_memory_usage']
                     space_NI = 100 * max(min(1 - (S_hat - S_1) / (S_2 - S_1), 1), 0)
@@ -190,7 +185,7 @@ class EvaluateLeetcodeStylePipeline():
         
         return round(p_cnt / len(results) * 100, 1)
     
-    def evaluate_pipeline_maintainability_module_count(self, cnt):
+    def evaluate_pipeline_maintainability_module_count(self, module_cnt):
         print(f'Reading from {self.result_path} ...')
         results = [json.loads(line) for line in open(self.result_path, 'r')]
 
@@ -198,14 +193,14 @@ class EvaluateLeetcodeStylePipeline():
         p_if_cnt = 0
         if_cnt = 0
         for result in results:
-            module_count = metrics_for_maintainability_module_count(result['generation'])
-            if module_count == cnt:
+            if_pass = metrics_for_maintainability_module_count(result['generation'], module_cnt)
+            if if_pass:
                 if_cnt += 1
             
             if result['passed']:
                 p_cnt += 1
 
-            if result['passed'] and module_count == cnt:
+            if result['passed'] and if_pass:
                 p_if_cnt += 1
         
         print(f'P rate for efficiency: {p_cnt / len(results):.3f} ({p_cnt}/{len(results)})')

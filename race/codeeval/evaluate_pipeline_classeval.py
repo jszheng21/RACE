@@ -226,7 +226,7 @@ class EvaluatePipeline():
 
         self.save_result(result_dict, "mi")
         
-        return round(global_mi_p / global_cnt_p, 1)
+        return round(global_mi / global_cnt, 1), round(global_mi_p / global_cnt_p, 1)
     
     def evaluate_pipeline_cohesion(self):
         task_code_dict = self.gen_task_code_dict()

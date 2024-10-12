@@ -10,6 +10,7 @@ def parse_code(text, only_second_stage=False, for_completion_model=False):
     if not only_second_stage:
         pattern_list = [r"```python3(.*?)```", r"```python3(.*)", 
                         r"```python(.*?)```", r"```python(.*)", 
+                        r"```py(.*?)```", r"```py(.*)", 
                         r"\[PYTHON\](.*?)\[/PYTHON\]", r"(.*?)\[/PYTHON\]", 
                         r"\[PYTHON\](.*)"]
         if for_completion_model:
@@ -20,10 +21,12 @@ def parse_code(text, only_second_stage=False, for_completion_model=False):
         
         for pattern in pattern_list:
             try:
-                code = re.findall(pattern, text, re.S)[0]
-                if len(code) > 0:
-                    text = code
-                    break
+                res = re.findall(pattern, text, re.S)
+                if len(res) > 0:
+                    for code in res:
+                        if len(code) > 0 and 'def' in code and 'return' in code:
+                            text = code
+                            break
             except:
                 continue    
 
@@ -33,10 +36,17 @@ def parse_code(text, only_second_stage=False, for_completion_model=False):
 
     # Follow the comments to find the test examples
     for i in reversed(range(len(splitted_text))):
-        if splitted_text[i].strip().startswith('#') and 'test' in splitted_text[i].lower():
+        if splitted_text[i].strip().startswith('#') and 'Test' in splitted_text[i]:
             r_line_idx = i
-        elif splitted_text[i].strip().startswith('#') and 'example' in splitted_text[i].lower():
+                
+        if splitted_text[i].strip().startswith('#') and 'Example' in splitted_text[i]:
             r_line_idx = i
+            
+        if r_line_idx != -1:
+            for i in reversed(range(r_line_idx + 1)):
+                if splitted_text[i].strip() == 'if __name__ == "__main__":':
+                    r_line_idx = i
+                    break
     
     # Find the test examples with print function
     if r_line_idx == -1:
@@ -48,6 +58,12 @@ def parse_code(text, only_second_stage=False, for_completion_model=False):
             if last_flag == 1 and len(splitted_text[i].strip()) == 0:
                 r_line_idx = i + 1
                 break
+        
+        if r_line_idx != -1:
+            for i in reversed(range(r_line_idx + 1)):
+                if splitted_text[i].strip() == 'if __name__ == "__main__":':
+                    r_line_idx = i
+                    break
 
     # Find the main function
     if r_line_idx == -1:

@@ -82,16 +82,23 @@ def retry_get_openai_response(
     if len(system_prompt) > 0:
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": user_prompt})
+
+    stops = []
     
     try:
-        return client.chat.completions.create(
+        ret = client.chat.completions.create(
             model=model,
             messages=messages,
             max_tokens=max_tokens,
             temperature=temperature,
             n=n,
+            stop=stops,
             **kwargs
         )
+        
+        if ret.choices is None:
+            raise ValueError("No response from OpenAI")
+        return ret
     except Exception as e:
         print(e)
         raise TimeoutError

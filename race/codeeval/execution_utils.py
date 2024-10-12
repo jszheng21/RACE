@@ -11,6 +11,7 @@ import tracemalloc
 import contextlib
 import signal
 import copy
+import re
 from typing import *
 
 # used for debugging to time steps

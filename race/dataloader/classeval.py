@@ -1,14 +1,16 @@
 import json
 import os
 from typing import Dict
+from pathlib import Path
 
 from race.dataloader.utils import (
     CACHE_DIR,
     make_cache,
 )
 
+DATA_DIR = Path(__file__).parent.parent.parent / "data" / "classeval"
 
-def get_class_eval(local_path=None) -> Dict[str, Dict]:
+def get_class_eval(local_classeval_file=None) -> Dict[str, Dict]:
     """Get ClassEval from FudanSELab's github repo and return as a list of parsed dicts.
 
     Returns:
@@ -25,7 +27,7 @@ def get_class_eval(local_path=None) -> Dict[str, Dict]:
         'fields'
         'methods_info'
     """
-    if local_path is None:
+    if local_classeval_file is None:
         # Check if data file exists in CACHE_DIR
         
         # Due to changes in the ClassEval_data version, use a fixed and uniform version
@@ -35,6 +37,8 @@ def get_class_eval(local_path=None) -> Dict[str, Dict]:
 
         make_cache(url_fix_version, data_path)
     else:
+        local_path = os.path.join(DATA_DIR, local_classeval_file)
+        
         assert os.path.exists(local_path), f"File not found: {local_path}"
         print(f"Loading dataset from {local_path}")
         data_path = local_path

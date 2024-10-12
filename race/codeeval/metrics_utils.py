@@ -176,7 +176,7 @@ def extract_function_bodies(code):
 
 # readibility
 def metrics_for_readability_camel(code):
-    pattern = re.compile(r'^[a-z]+(?:[A-Z][a-z]*)*$')
+    pattern = re.compile(r'^[a-z]+(?:[A-Z][a-z0-9]*)*$')
 
     names = extract_function_names(code)
     names += extract_variable_names(code)
@@ -190,7 +190,7 @@ def metrics_for_readability_camel(code):
 
 
 def metrics_for_readability_snake(code):
-    pattern = re.compile(r'^[a-z]+(?:_[a-z]+)*$')
+    pattern = re.compile(r'^(?![0-9])_?[a-z0-9]+(?:_[a-z0-9]+)*$')
 
     names = extract_function_names(code)
     names += extract_variable_names(code)
@@ -204,7 +204,7 @@ def metrics_for_readability_snake(code):
 
 
 def metrics_for_readability_function_camel(code):
-    pattern = re.compile(r'^[a-z]+(?:[A-Z][a-z]*)*$')
+    pattern = re.compile(r'^[a-z]+(?:[A-Z][a-z0-9]*)*$')
 
     names = extract_function_names(code)
     if len(names) == 0:
@@ -217,7 +217,7 @@ def metrics_for_readability_function_camel(code):
 
 
 def metrics_for_readability_function_snake(code):
-    pattern = re.compile(r'^[a-z]+(?:_[a-z]+)*$')
+    pattern = re.compile(r'^(?![0-9])_?[a-z0-9]+(?:_[a-z0-9]+)*$')
 
     names = extract_function_names(code)
     if len(names) == 0:
@@ -230,7 +230,7 @@ def metrics_for_readability_function_snake(code):
 
 
 def metrics_for_readability_var_camel(code):
-    pattern = re.compile(r'^[a-z]+(?:[A-Z][a-z]*)*$')
+    pattern = re.compile(r'^[a-z]+(?:[A-Z][a-z0-9]*)*$')
 
     names = extract_variable_names(code)
     if len(names) == 0:
@@ -243,7 +243,7 @@ def metrics_for_readability_var_camel(code):
 
 
 def metrics_for_readability_var_snake(code):
-    pattern = re.compile(r'^[a-z]+(?:_[a-z]+)*$')
+    pattern = re.compile(r'^(?![0-9])_?[a-z0-9]+(?:_[a-z0-9]+)*$')
 
     names = extract_variable_names(code)
     if len(names) == 0:
@@ -271,6 +271,15 @@ def metrics_for_readability_length(code, max_line_length=100, max_function_lengt
     return True
 
 
+def metrics_for_readability_length_only_line_length(code, max_line_length):
+    splitted_code = code.split('\n')
+    for line in splitted_code:
+        if len(line) > max_line_length:
+            return False
+        
+    return True
+
+
 def metrics_for_readability_comment_by_function(code):
     try:
         code_bytes = bytes(code, "utf8")
@@ -282,7 +291,7 @@ def metrics_for_readability_comment_by_function(code):
         return True
 
     for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             if not (node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str)):
                 return False
 
@@ -355,7 +364,11 @@ def metrics_for_readability_comment_by_line(code, threshold=0.75):
         merged_code = merge_lines(code)
         merged_code = ast.unparse(merged_code)
         
-        total_line_cnt = len(merged_code.split('\n'))
+        splitted_merged_code = merged_code.split('\n')
+        total_line_cnt = sum(1 for line in splitted_merged_code if line.strip() 
+                             and 'def' not in line 
+                             and 'class' not in line
+                             and 'import' not in line)
         
         if comment_line_cnt / total_line_cnt >= threshold:
             return True
@@ -391,7 +404,11 @@ def metrics_for_readability_arg_count(code):
 def metrics_for_maintainability_cohesion(code):
     local_scope = {}
     with swallow_io():
-        exec(code, {}, local_scope)  # TODO, unsafe
+        try:
+            exec(code, {}, local_scope)  # TODO, unsafe
+        except Exception as e:
+            print(f"Failed to execute code: {e}")
+            return 0
     
     class_names = extract_class_names(code)
     lcom_results = {}
@@ -440,8 +457,8 @@ def metrics_for_maintainability_mi(code):
     return round(mi_visit(code, True), 2)
 
 
-def metrics_for_maintainability_module_count(code):
-    return len(extract_function_names(code))
+def metrics_for_maintainability_module_count(code, module_count=1):
+    return len(extract_function_names(code)) == module_count
 
 
 ###########################################################################################

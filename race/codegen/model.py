@@ -33,7 +33,7 @@ except ImportError:
 try:
     from stop_sequencer import StopSequencer
 except ImportError:
-    warn("HF-based decoder will not work. Fix by `pip install vllm`")
+    warn("HF-based decoder will not work. Fix by `pip install stop_sequencer`")
     
 # google
 try:
